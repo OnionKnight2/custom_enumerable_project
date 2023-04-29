@@ -2,6 +2,19 @@
 
 module Enumerable
   # Your code goes here
+  def my_each_with_index(&block)
+    to_enum(:my_each_with_index) unless block_given?
+
+    for i in 0..length-1 do
+      if block.arity == 2
+        yield(self[i], i)
+      else
+        yield(self[i])
+      end
+    end
+
+    self
+  end
 end
 
 # You will first have to define my_each
@@ -17,4 +30,6 @@ class Array
       yield(item)
     end
   end
+
+  self
 end
