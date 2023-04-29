@@ -39,6 +39,15 @@ module Enumerable
 
     any
   end
+
+  def my_none?(&block)
+    to_enum(:my_none?) unless block_given?
+    none = true
+
+    my_each { |item| none = false if block.call(item) }
+
+    none
+  end
 end
 
 # You will first have to define my_each
