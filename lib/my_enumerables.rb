@@ -2,18 +2,24 @@
 
 module Enumerable
   # Your code goes here
-  def my_each_with_index(&block)
+  def my_each_with_index
     to_enum(:my_each_with_index) unless block_given?
 
     for i in 0..length-1 do
-      if block.arity == 2
-        yield(self[i], i)
-      else
-        yield(self[i])
-      end
+      yield(self[i], i)
     end
 
     self
+  end
+
+  def my_select(&block)
+    array = []
+
+    to_enum(:my_select) unless block_given?
+
+    my_each { |item| array.push(item) if block.call(item) }
+
+    array
   end
 end
 
