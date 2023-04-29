@@ -30,6 +30,15 @@ module Enumerable
 
     all
   end
+
+  def my_any?(&block)
+    to_enum(:my_any?) unless block_given?
+    any = false
+
+    my_each { |item| any = true if block.call(item) }
+
+    any
+  end
 end
 
 # You will first have to define my_each
