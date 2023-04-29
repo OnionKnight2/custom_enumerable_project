@@ -21,6 +21,15 @@ module Enumerable
 
     array
   end
+
+  def my_all?(&block)
+    to_enum(:my_all?) unless block_given?
+    all = true
+
+    my_each { |item| all = false unless block.call(item) }
+
+    all
+  end
 end
 
 # You will first have to define my_each
