@@ -48,6 +48,16 @@ module Enumerable
 
     none
   end
+
+  def my_count(&block)
+    if block_given?
+      array = []
+      my_each { |item| array.push(item) if block.call(item) }
+      array.length
+    else
+      length
+    end
+  end
 end
 
 # You will first have to define my_each
