@@ -1,3 +1,5 @@
+# frozen-string-literal: true
+
 module Enumerable
   # Your code goes here
 end
@@ -8,4 +10,11 @@ end
 # to this method
 class Array
   # Define my_each here
+  def my_each
+    to_enum(:my_each) unless block_given?
+
+    for item in self
+      yield(item)
+    end
+  end
 end
