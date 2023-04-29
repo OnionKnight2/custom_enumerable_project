@@ -58,6 +58,15 @@ module Enumerable
       length
     end
   end
+
+  def my_map(&block)
+    to_enum(:my_map) unless block_given?
+    array = []
+
+    my_each { |item| array.push(block.call(item)) }
+
+    array
+  end
 end
 
 # You will first have to define my_each
