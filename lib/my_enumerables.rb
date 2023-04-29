@@ -67,6 +67,13 @@ module Enumerable
 
     array
   end
+
+  def my_inject(initial_value, &block)
+    accumulator = initial_value
+    my_each { |item| accumulator = block.call(accumulator, item) }
+
+    accumulator
+  end
 end
 
 # You will first have to define my_each
